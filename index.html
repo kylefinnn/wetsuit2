@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oceanic Surf Co. | Premium Surf Gear & Wetsuits</title>
+  <meta name="description" content="Premium surf gear, wetsuits, and accessories for surfers of all levels. Committed to ocean conservation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            },
+            secondary: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              200: '#ddd6fe',
+              300: '#c4b5fd',
+              400: '#a78bfa',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              800: '#5b21b6',
+              900: '#4c1d95',
+            },
+            accent: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+            }
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-in-out',
+            'slide-up': 'slideUp 0.5s ease-out',
+            'pulse-slow': 'pulse 3s infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --header-height: 80px;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--header-height) + 20px);
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+    
+    .dark ::-webkit-scrollbar-track {
+      background: #2d3748;
+    }
+    .dark ::-webkit-scrollbar-thumb {
+      background: #4a5568;
+    }
+    
+    /* Modal styles */
+    .modal-overlay {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .modal-content {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translateY(20px);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+    
+    .dark .modal-content {
+      background: #1e293b;
+    }
+    
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    /* Gallery slider */
+    .gallery-slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    
+    .gallery-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    
+    .gallery-slide.active {
+      opacity: 1;
+    }
+    
+    /* Testimonial slider */
+    .testimonial-slide {
+      position: absolute;
+      width: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    
+    .testimonial-slide.active {
+      opacity: 1;
+    }
+    
+    /* Rating stars */
+    .rating-stars {
+      color: #fbbf24;
+    }
+    
+    /* Step indicator */
+    .step-indicator {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    
+    .step-indicator::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #e2e8f0;
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+    
+    .dark .step-indicator::before {
+      background: #334155;
+    }
+    
+    .step {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      font-weight: 600;
+      color: #64748b;
+    }
+    
+    .dark .step {
+      background: #334155;
+      color: #94a3b8;
+    }
+    
+    .step.active {
+      background: #0ea5e9;
+      color: white;
+    }
+    
+    .step.completed {
+      background: #22c55e;
+      color: white;
+    }
+    
+    /* Custom checkbox */
+    .custom-checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #cbd5e1;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    
+    .custom-checkbox.checked {
+      background: #0ea5e9;
+      border-color: #0ea5e9;
+    }
+    
+    .custom-checkbox.checked::after {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: white;
+      font-size: 12px;
+    }
+    
+    /* Animation classes */
+    .animate-fade-in {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+    
+    .animate-slide-up {
+      animation: slideUp 0.8s ease-out forwards;
+    }
+    
+    .delay-100 {
+      animation-delay: 0.1s;
+    }
+    
+    .delay-200 {
+      animation-delay: 0.2s;
+    }
+    
+    .delay-300 {
+      animation-delay: 0.3s;
+    }
+    
+    /* Pulse animation for CTA */
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .pulse:hover {
+      animation: pulse 1s infinite;
+    }
+    
+    /* Card hover effect */
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Dark mode transitions */
+    .dark-transition * {
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+    
+    /* Cart badge */
+    .cart-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 20px;
+      height: 20px;
+      background: #ef4444;
+      color: white;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans dark-transition dark:bg-gray-900">
+  <!-- Navigation -->
+  <nav class="fixed w-full z-50 bg-white shadow-sm dark:bg-gray-800">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <a href="#hero" class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-primary-600 dark:text-primary-400">
+              <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+            </svg>
+            <span class="ml-2 text-xl font-bold text-gray-800 dark:text-white">Oceanic<span class="text-primary-600 dark:text-primary-400">Surf</span></span>
+          </a>
+        </div>
+        
+        <div class="hidden md:flex items-center space-x-1">
+          <a href="#hero" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition">Home</a>
+          <a href="#products" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition">Products</a>
+          <a href="#testimonials" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition">Testimonials</a>
+          <a href="#mission" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition">Our Mission</a>
+          <a href="#faq" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition">FAQ</a>
+          <a href="#contact" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition">Contact</a>
+          
+          <!-- Dark mode toggle -->
+          <button id="darkModeToggle" class="p-2 rounded-full text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 focus:outline-none transition">
+            <svg id="darkModeIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+          </button>
+          
+          <!-- Cart button -->
+          <div class="relative ml-2">
+            <button id="cartButton" class="p-2 rounded-full text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 focus:outline-none transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </button>
+            <div id="cartBadge" class="cart-badge hidden">0</div>
+          </div>
+        </div>
+        
+        <!-- Mobile menu button -->
+        <div class="md:hidden flex items-center">
+          <div class="relative mr-2">
+            <button id="mobileCartButton" class="p-2 rounded-full text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 focus:outline-none transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </button>
+            <div id="mobileCartBadge" class="cart-badge hidden">0</div>
+          </div>
+          
+          <button id="mobileMenuToggle" class="p-2 rounded-md text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 focus:outline-none transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-gray-800 shadow-lg">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <a href="#hero" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition">Home</a>
+        <a href="#products" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition">Products</a>
+        <a href="#testimonials" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition">Testimonials</a>
+        <a href="#mission" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition">Our Mission</a>
+        <a href="#faq" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition">FAQ</a>
+        <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition">Contact</a>
+        <div class="px-3 py-2">
+          <button id="mobileDarkModeToggle" class="flex items-center text-gray-700 dark:text-gray-300">
+            <svg id="mobileDarkModeIcon" class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            <span>Toggle Dark Mode</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative pt-24 pb-16 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32 bg-gradient-to-r from-primary-500 to-primary-700 dark:from-primary-600 dark:to-primary-800">
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute inset-0 bg-black/30 dark:bg-black/40"></div>
+      <img src="hero-surfer.jpg" alt="Surfer riding a wave" class="w-full h-full object-cover">
+    </div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-3xl mx-auto text-center animate-fade-in">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 animate-slide-up">
+          Ride The Waves <span class="text-accent-300">In Style</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-100 mb-8 animate-slide-up delay-100">
+          Premium surf gear and wetsuits designed for performance and comfort
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4 animate-slide-up delay-200">
+          <a href="#products" class="px-8 py-4 bg-accent-500 hover:bg-accent-600 text-white font-bold rounded-full transition pulse shadow-lg">
+            Shop Now
+          </a>
+          <a href="#mission" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-full transition backdrop-blur-sm border border-white/20">
+            Our Mission
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 dark:from-gray-900 to-transparent"></div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">Why Choose Oceanic Surf?</h2>
+        <p class="text-lg text-gray-600 dark:text-gray-300">We combine performance, comfort, and sustainability in every product</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm hover:shadow-md transition card-hover">
+          <div class="w-14 h-14 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">High Performance</h3>
+          <p class="text-gray-600 dark:text-gray-300">Our wetsuits are engineered with cutting-edge materials for maximum flexibility and warmth in all conditions.</p>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm hover:shadow-md transition card-hover">
+          <div class="w-14 h-14 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Premium Quality</h3>
+          <p class="text-gray-600 dark:text-gray-300">Every product undergoes rigorous testing to ensure durability and long-lasting performance in saltwater conditions.</p>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm hover:shadow-md transition card-hover">
+          <div class="w-14 h-14 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Fast Shipping</h3>
+          <p class="text-gray-600 dark:text-gray-300">Orders placed before 3pm PST ship same day. Free shipping on all orders over $100.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products" class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">Featured Products</h2>
+        <p class="text-lg text-gray-600 dark:text-gray-300">Premium wetsuits and surf gear for all conditions</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Product 1 -->
+        <div class="bg-white dark:bg-gray-700 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition card-hover">
+          <div class="relative h-64">
+            <img src="wetsuit-1.jpg" alt="Premium 4/3mm Wetsuit" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4 bg-white dark:bg-gray-800 text-primary-600 dark:text-primary-400 px-3 py-1 rounded-full text-sm font-semibold shadow-sm">
+              $249.99
+            </div>
+          </div>
+          
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Premium 4/3mm Wetsuit</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">Our best-selling wetsuit for year-round comfort in most conditions. Features our patented FlexSeam technology.</p>
+            
+            <div class="flex items-center mb-4">
+              <div class="rating-stars mr-2">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <span class="text-sm text-gray-500 dark:text-gray-400">4.7 (128 reviews)</span>
+            </div>
+            
+            <div class="flex justify-between items-center">
+              <button data-product-id="1" class="add-to-cart px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg transition">
+                Add to Cart
+              </button>
+              <button class="p-2 text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product 2 -->
+        <div class="bg-white dark:bg-gray-700 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition card-hover">
+          <div class="relative h-64">
+            <img src="wetsuit-2.jpg" alt="Performance 3/2mm Wetsuit" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4 bg-white dark:bg-gray-800 text-primary-600 dark:text-primary-400 px-3 py-1 rounded-full text-sm font-semibold shadow-sm">
+              $199.99
+            </div>
+          </div>
+          
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Performance 3/2mm Wetsuit</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">Lightweight and flexible for warm water conditions. Perfect for summer surfing with maximum mobility.</p>
+            
+            <div class="flex items-center mb-4">
+              <div class="rating-stars mr-2">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <span class="text-sm text-gray-500 dark:text-gray-400">4.2 (94 reviews)</span>
+            </div>
+            
+            <div class="flex justify-between items-center">
+              <button data-product-id="2" class="add-to-cart px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg transition">
+                Add to Cart
+              </button>
+              <button class="p-2 text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product 3 -->
+        <div class="bg-white dark:bg-gray-700 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition card-hover">
+          <div class="relative h-64">
+            <img src="wetsuit-3.jpg" alt="Pro 5/4mm Hooded Wetsuit" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4 bg-white dark:bg-gray-800 text-primary-600 dark:text-primary-400 px-3 py-1 rounded-full text-sm font-semibold shadow-sm">
+              $299.99
+            </div>
+          </div>
+          
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Pro 5/4mm Hooded Wetsuit</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">For the coldest conditions. Built with thermal lining and integrated hood for maximum warmth.</p>
+            
+            <div class="flex items-center mb-4">
+              <div class="rating-stars mr-2">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <span class="text-sm text-gray-500 dark:text-gray-400">4.9 (76 reviews)</span>
+            </div>
+            
+            <div class="flex justify-between items-center">
+              <button data-product-id="3" class="add-to-cart px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg transition">
+                Add to Cart
+              </button>
+              <button class="p-2 text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-12 text-center">
+        <a href="#" class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition shadow-md">
+          View All Products
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">What Our Customers Say</h2>
+        <p class="text-lg text-gray-600 dark:text-gray-300">Trusted by surfers around the world</p>
+      </div>
+      
+      <div class="max-w-3xl mx-auto relative h-64">
+        <div class="testimonial-slide active">
+          <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-sm">
+            <div class="flex items-center mb-4">
+              <div class="rating-stars mr-2">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <span class="text-sm text-gray-500 dark:text-gray-400">5.0</span>
+            </div>
+            <p class="text-lg italic text-gray-700 dark:text-gray-300 mb-6">"I've surfed in wetsuits from all the major brands, but none compare to the comfort and flexibility of my Oceanic 4/3. It's like a second skin that keeps me warm even in chilly Pacific waters."</p>
+            <div class="flex items-center">
+              <div class="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-600 overflow-hidden mr-4">
+                <img src="testimonial-1.jpg" alt="Alex K." class="w-full h-full object-cover">
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-800 dark:text-white">Alex K.</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Pro Surfer, California</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-slide">
+          <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-sm">
+            <div class="flex items-center mb-4">
+              <div class="rating-stars mr-2">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <span class="text-sm text-gray-500 dark:text-gray-400">5.0</span>
+            </div>
+            <p class="text-lg italic text-gray-700 dark:text-gray-300 mb-6">"The 3/2 Performance suit is perfect for Hawaii's warm waters. I can paddle for hours without feeling restricted. Plus, the eco-friendly materials make me feel good about my purchase."</p>
+            <div class="flex items-center">
+              <div class="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-600 overflow-hidden mr-4">
+                <img src="testimonial-2.jpg" alt="Jamie L." class="w-full h-full object-cover">
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-800 dark:text-white">Jamie L.</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Surf Instructor, Oahu</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-slide">
+          <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-sm">
+            <div class="flex items-center mb-4">
+              <div class="rating-stars mr-2">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <span class="text-sm text-gray-500 dark:text-gray-400">4.5</span>
+            </div>
+            <p class="text-lg italic text-gray-700 dark:text-gray-300 mb-6">"As a beginner, I was nervous about buying an expensive wetsuit, but the comfort and warmth of the Oceanic 5/4 has made winter surfing enjoyable. Customer service was excellent when I needed sizing advice."</p>
+            <div class="flex items-center">
+              <div class="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-600 overflow-hidden mr-4">
+                <img src="testimonial-3.jpg" alt="Taylor R." class="w-full h-full object-cover">
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-800 dark:text-white">Taylor R.</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Beginner Surfer, Oregon</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Navigation arrows -->
+        <button id="testimonialPrev" class="absolute -left-12 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-700 text-primary-600 dark:text-primary-400 p-2 rounded-full shadow hover:bg-gray-100 dark:hover:bg-gray-600 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button id="testimonialNext" class="absolute -right-12 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-700 text-primary-600 dark:text-primary-400 p-2 rounded-full shadow hover:bg-gray-100 dark:hover:bg-gray-600 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section id="mission" class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col lg:flex-row items-center gap-12">
+        <div class="lg:w-1/2">
+          <img src="ocean-pollution.jpg" alt="Ocean conservation" class="w-full h-auto rounded-xl shadow-lg">
+        </div>
+        <div class="lg:w-1/2">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">Our Commitment to the Ocean</h2>
+          <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">At Oceanic Surf, we believe in giving back to the waters that give us so much joy. That's why we're committed to sustainable practices and ocean conservation.</p>
+          
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 dark:bg-primary-900 rounded-lg p-3 mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-800 dark:text-white mb-1">Sustainable Materials</h3>
+                <p class="text-gray-600 dark:text-gray-300">All our wetsuits use limestone-based neoprene and recycled fabrics to minimize environmental impact.</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 dark:bg-primary-900 rounded-lg p-3 mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-800 dark:text-white mb-1">1% for the Planet</h3>
+                <p class="text-gray-600 dark:text-gray-300">We donate 1% of all sales to ocean cleanup initiatives and marine conservation organizations.</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 dark:bg-primary-900 rounded-lg p-3 mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-800 dark:text-white mb-1">Ethical Manufacturing</h3>
+                <p class="text-gray-600 dark:text-gray-300">Our products are made in facilities that meet strict environmental and labor standards.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-8">
+            <a href="#" class="inline-block px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition shadow-md">
+              Learn More About Our Mission
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">Frequently Asked Questions</h2>
+        <p class="text-lg text-gray-600 dark:text-gray-300">Find answers to common questions about our products</p>
+      </div>
+      
+      <div class="max-w-3xl mx-auto">
+        <div class="space-y-4">
+          <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-question w-full px-6 py-4 text-left bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition flex justify-between items-center">
+              <span class="font-medium text-gray-800 dark:text-white">How do I choose the right wetsuit thickness?</span>
+              <svg class="faq-icon w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="faq-answer px-6 py-4 bg-white dark:bg-gray-700 hidden">
+              <p class="text-gray-600 dark:text-gray-300">Wetsuit thickness depends on water temperature. For warm water (70°F+), a 2mm or 3/2mm suit is ideal. Temperate waters (60-70°F) need 3/2mm or 4/3mm. Cold water (50-60°F) requires 4/3mm or 5/4/3mm. For freezing conditions (below 50°F), consider a 6/5/4mm with hood, boots, and gloves.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-question w-full px-6 py-4 text-left bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition flex justify-between items-center">
+              <span class="font-medium text-gray-800 dark:text-white">How should a wetsuit fit?</span>
+              <svg class="faq-icon w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="faq-answer px-6 py-4 bg-white dark:bg-gray-700 hidden">
+              <p class="text-gray-600 dark:text-gray-300">A proper wetsuit should fit snugly like a second skin without restricting movement. There should be no gaps at the neck, wrists, or ankles where water can flush through. The suit will loosen slightly in water. If you can easily pull the neoprene away from your skin when dry, it's too big.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-question w-full px-6 py-4 text-left bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition flex justify-between items-center">
+              <span class="font-medium text-gray-800 dark:text-white">How do I care for my wetsuit?</span>
+              <svg class="faq-icon w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="faq-answer px-6 py-4 bg-white dark:bg-gray-700 hidden">
+              <p class="text-gray-600 dark:text-gray-300">Always rinse your wetsuit with fresh water after each use. Hang dry inside out in shade (sunlight degrades neoprene). Store on a wide hanger or folded loosely. Avoid sharp objects that can tear the material. Use wetsuit shampoo occasionally to remove odors and bacteria. Never dry clean or machine wash.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-question w-full px-6 py-4 text-left bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition flex justify-between items-center">
+              <span class="font-medium text-gray-800 dark:text-white">What's your return policy?</span>
+              <svg class="faq-icon w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="faq-answer px-6 py-4 bg-white dark:bg-gray-700 hidden">
+              <p class="text-gray-600 dark:text-gray-300">We offer a 30-day return policy on unworn, unwashed merchandise with original tags attached. Wetsuits that have been in water cannot be returned for hygiene reasons. Please contact our customer service for return authorization before sending anything back.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-question w-full px-6 py-4 text-left bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition flex justify-between items-center">
+              <span class="font-medium text-gray-800 dark:text-white">Do you offer international shipping?</span>
+              <svg class="faq-icon w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="faq-answer px-6 py-4 bg-white dark:bg-gray-700 hidden">
+              <p class="text-gray-600 dark:text-gray-300">Yes, we ship worldwide! Shipping costs vary by destination and will be calculated at checkout. International orders may be subject to customs fees, taxes, or duties which are the responsibility of the customer. Delivery times vary by country but typically range from 5-15 business days after shipment.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-8 text-center">
+          <p class="text-gray-600 dark:text-gray-300 mb-4">Still have questions?</p>
+          <a href="#contact" class="inline-block px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition shadow-md">
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-gradient-to-r from-primary-500 to-primary-700 dark:from-primary-600 dark:to-primary-800">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Ride the Waves?</h2>
+        <p class="text-xl text-gray-100 mb-8">Join thousands of surfers who trust Oceanic Surf for their gear</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href="#products" class="px-8 py-4 bg-white hover:bg-gray-100 text-primary-600 font-bold rounded-full transition shadow-lg">
+            Shop Now
+          </a>
+          <a href="tel:+18005551234" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-full transition backdrop-blur-sm border border-white/20">
+            <i class="fas fa-phone-alt mr-2"></i> Call: (310) 745-7717
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">Contact Us</h2>
+        <p class="text-lg text-gray-600 dark:text-gray-300">Have questions or need assistance? Our team is here to help</p>
+      </div>
+      
+      <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm">
+          <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Get in Touch</h3>
+          <form id="contactForm">
+            <div class="mb-4">
+              <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
+              <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-600 dark:text-white" required>
+            </div>
+            <div class="mb-4">
+              <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+              <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-600 dark:text-white" required>
+            </div>
+            <div class="mb-4">
+              <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subject</label>
+              <select id="subject" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-600 dark:text-white" required>
+                <option value="">Select a subject</option>
+                <option>Product Questions</option>
+                <option>Order Support</option>
+                <option>Sizing Help</option>
+                <option>Returns</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
+              <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-600 dark:text-white" required></textarea>
+            </div>
+            <button type="submit" class="w-full px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition shadow-md">
+              Send Message
+            </button>
+          </form>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm">
+          <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Contact Information</h3>
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 dark:bg-primary-900 rounded-lg p-3 mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-800 dark:text-white">Phone</h4>
+                <p class="text-gray-600 dark:text-gray-300">(310) 745-7717</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Mon-Fri, 9am-5pm PST</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 dark:bg-primary-900 rounded-lg p-3 mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-800 dark:text-white">Email</h4>
+                <p class="text-gray-600 dark:text-gray-300">support@oceanicsurf.com</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Typically respond within 24 hours</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 dark:bg-primary-900 rounded-lg p-3 mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-800 dark:text-white">Retail Store</h4>
+                <p class="text-gray-600 dark:text-gray-300">123 Surfside Way</p>
+                <p class="text-gray-600 dark:text-gray-300">Malibu, CA 90265</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-6">
+            <h4 class="font-medium text-gray-800 dark:text-white mb-2">Follow Us</h4>
+            <div class="flex space-x-4">
+              <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition">
+                <i class="fab fa-youtube"></i>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition">
+                <i class="fab fa-tiktok"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-gray-300 py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-lg font-semibold text-white mb-4">Oceanic Surf</h3>
+          <p class="mb-4">Premium surf gear designed for performance and built with sustainability in mind.</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="#hero" class="hover:text-white transition">Home</a></li>
+            <li><a href="#products" class="hover:text-white transition">Products</a></li>
+            <li><a href="#testimonials" class="hover:text-white transition">Testimonials</a></li>
+            <li><a href="#mission" class="hover:text-white transition">Our Mission</a></li>
+            <li><a href="#faq" class="hover:text-white transition">FAQ</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold text-white mb-4">Company</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white transition">About Us</a></li>
+            <li><a href="#" class="hover:text-white transition">Careers</a></li>
+            <li><a href="#" class="hover:text-white transition">Blog</a></li>
+            <li><a href="#" class="hover:text-white transition">Press</a></li>
+            <li><a href="#" class="hover:text-white transition">Sustainability</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold text-white mb-4">Legal</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+            <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-white transition">Shipping Policy</a></li>
+            <li><a href="#" class="hover:text-white transition">Returns</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p>&copy; 2025 Oceanic Surf Co. All rights reserved.</p>
+        <div class="mt-4 md:mt-0">
+          <img src="https://via.placeholder.com/200x50?text=Payment+Methods" alt="Payment methods" class="h-8">
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Modal -->
+  <div id="cartModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="p-6">
+        <button id="closeCartModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Your Cart</h2>
+        
+        <div id="cartItems" class="mb-6">
+          <!-- Cart items will be injected here -->
+          <div class="text-center py-8">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <p class="text-gray-600 dark:text-gray-300">Your cart is empty</p>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-200 dark:border-gray-700 pt-4 mb-6">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-gray-600 dark:text-gray-300">Subtotal</span>
+            <span id="cartSubtotal" class="font-medium text-gray-800 dark:text-white">$0.00</span>
+          </div>
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-gray-600 dark:text-gray-300">Shipping</span>
+            <span id="cartShipping" class="font-medium text-gray-800 dark:text-white">Calculated at checkout</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-600 dark:text-gray-300">Tax</span>
+            <span id="cartTax" class="font-medium text-gray-800 dark:text-white">Calculated at checkout</span>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-200 dark:border-gray-700 pt-4 mb-6">
+          <div class="flex justify-between items-center">
+            <span class="font-semibold text-gray-800 dark:text-white">Total</span>
+            <span id="cartTotal" class="text-xl font-bold text-primary-600 dark:text-primary-400">$0.00</span>
+          </div>
+        </div>
+        
+        <button id="checkoutButton" class="w-full px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+          Proceed to Checkout
+        </button>
+        
+        <div class="mt-4 text-center">
+          <a href="#products" class="text-sm text-primary-600 dark:text-primary-400 hover:underline">Continue Shopping</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="p-6">
+        <button id="closeCheckoutModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        
+        <div class="step-indicator mb-8">
+          <div class="step active">1</div>
+          <div class="step">2</div>
+          <div class="step">3</div>
+        </div>
+        
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Checkout</h2>
+        
+        <form id="checkoutForm">
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Contact Information</h3>
+            <div class="mb-4">
+              <label for="checkoutEmail" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+              <input type="email" id="checkoutEmail" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white" required>
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Shipping Address</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label for="firstName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">First Name</label>
+                <input type="text" id="firstName" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white" required>
+              </div>
+              <div>
+                <label for="lastName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Last Name</label>
+                <input type="text" id="lastName" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white" required>
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <label for="address" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Address</label>
+              <input type="text" id="address" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white" required>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <div>
+                <label for="city" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">City</label>
+                <input type="text" id="city" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white" required>
+              </div>
+              <div>
+                <label for="state" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">State/Province</label>
+                <input type="text" id="state" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white" required>
+              </div>
+              <div>
+                <label for="zip" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">ZIP/Postal Code</label>
+                <input type="text" id="zip" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white" required>
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <label for="country" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Country</label>
+              <select id="country" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white" required>
+                <option value="">Select Country</option>
+                <option value="US">United States</option>
+                <option value="CA">Canada</option>
+                <option value="UK">United Kingdom</option>
+                <option value="AU">Australia</option>
+                <option value="DE">Germany</option>
+                <option value="FR">France</option>
+                <option value="JP">Japan</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Payment Method</h3>
+            <div class="space-y-4">
+              <div class="flex items-center">
+                <input type="radio" id="creditCard" name="paymentMethod" value="creditCard" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 dark:border-gray-600" checked>
+                <label for="creditCard" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-300">Credit Card</label>
+              </div>
+              <div class="flex items-center">
+                <input type="radio" id="paypal" name="paymentMethod" value="paypal" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 dark:border-gray-600">
+                <label for="paypal" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-300">PayPal</label>
+              </div>
+              <div class="flex items-center">
+                <input type="radio" id="applePay" name="paymentMethod" value="applePay" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 dark:border-gray-600">
+                <label for="applePay" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-300">Apple Pay</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="border-t border-gray-200 dark:border-gray-700 pt-4 mb-6">
+            <div class="flex justify-between items-center">
+              <span class="font-semibold text-gray-800 dark:text-white">Total</span>
+              <span id="checkoutTotal" class="text-xl font-bold text-primary-600 dark:text-primary-400">$0.00</span>
+            </div>
+          </div>
+          
+          <button type="submit" class="w-full px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition shadow-md">
+            Complete Order
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Confirmation Modal -->
+  <div id="confirmationModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="p-6">
+        <div class="text-center py-8">
+          <div class="w-20 h-20 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          
+          <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Order Confirmed!</h2>
+          <p class="text-gray-600 dark:text-gray-300 mb-6">Thank you for your purchase. Your order has been received and is being processed.</p>
+          
+          <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg mb-6 text-left">
+            <h3 class="font-semibold text-gray-800 dark:text-white mb-4">Order Details</h3>
+            
+            <div class="mb-4">
+              <p class="text-sm text-gray-500 dark:text-gray-400">Order Number</p>
+              <p class="font-medium text-gray-800 dark:text-white">#OCEAN-<span id="orderNumber">12345</span></p>
+            </div>
+            
+            <div class="mb-4">
+              <p class="text-sm text-gray-500 dark:text-gray-400">Date</p>
+              <p class="font-medium text-gray-800 dark:text-white"><span id="orderDate">June 15, 2023</span></p>
+            </div>
+            
+            <div class="mb-4">
+              <p class="text-sm text-gray-500 dark:text-gray-400">Total</p>
+              <p class="font-medium text-gray-800 dark:text-white">$<span id="orderTotal">0.00</span></p>
+            </div>
+            
+            <div>
+              <p class="text-sm text-gray-500 dark:text-gray-400">Payment Method</p>
+              <p class="font-medium text-gray-800 dark:text-white"><span id="paymentMethod">Credit Card</span></p>
+            </div>
+          </div>
+          
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <button onclick="closeModalHandler()" class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition shadow-md">
+              Continue Shopping
+            </button>
+            <button class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium rounded-lg transition dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white">
+              <i class="fas fa-print mr-2"></i> Print Receipt
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Product data
+    const products = [
+      {
+        id: 1,
+        name: "Premium 4/3mm Wetsuit",
+        price: 249.99,
+        image: "wetsuit-1.jpg",
+        description: "Our best-selling wetsuit for year-round comfort in most conditions. Features our patented FlexSeam technology.",
+        rating: 4.7,
+        reviewCount: 128
+      },
+      {
+        id: 2,
+        name: "Performance 3/2mm Wetsuit",
+        price: 199.99,
+        image: "wetsuit-2.jpg",
+        description: "Lightweight and flexible for warm water conditions. Perfect for summer surfing with maximum mobility.",
+        rating: 4.2,
+        reviewCount: 94
+      },
+      {
+        id: 3,
+        name: "Pro 5/4mm Hooded Wetsuit",
+        price: 299.99,
+        image: "wetsuit-3.jpg",
+        description: "For the coldest conditions. Built with thermal lining and integrated hood for maximum warmth.",
+        rating: 4.9,
+        reviewCount: 76
+      }
+    ];
+    
+    // Cart data
+    let cart = [];
+    
+    // DOM Elements
+    const htmlElement = document.documentElement;
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const darkModeIcon = document.getElementById('darkModeIcon');
+    const mobileDarkModeToggle = document.getElementById('mobileDarkModeToggle');
+    const mobileDarkModeIcon = document.getElementById('mobileDarkModeIcon');
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const cartButton = document.getElementById('cartButton');
+    const cartBadge = document.getElementById('cartBadge');
+    const mobileCartButton = document.getElementById('mobileCartButton');
+    const mobileCartBadge = document.getElementById('mobileCartBadge');
+    const cartModal = document.getElementById('cartModal');
+    const closeCartModal = document.getElementById('closeCartModal');
+    const cartItems = document.getElementById('cartItems');
+    const cartSubtotal = document.getElementById('cartSubtotal');
+    const cartTotal = document.getElementById('cartTotal');
+    const checkoutButton = document.getElementById('checkoutButton');
+    const checkoutModal = document.getElementById('checkoutModal');
+    const closeCheckoutModal = document.getElementById('closeCheckoutModal');
+    const checkoutForm = document.getElementById('checkoutForm');
+    const checkoutTotal = document.getElementById('checkoutTotal');
+    const confirmationModal = document.getElementById('confirmationModal');
+    const orderNumber = document.getElementById('orderNumber');
+    const orderDate = document.getElementById('orderDate');
+    const orderTotal = document.getElementById('orderTotal');
+    const paymentMethod = document.getElementById('paymentMethod');
+    
+    // Testimonial elements
+    const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+    const testimonialPrev = document.getElementById('testimonialPrev');
+    const testimonialNext = document.getElementById('testimonialNext');
+    
+    // FAQ elements
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    // Contact form
+    const contactForm = document.getElementById('contactForm');
+    
+    // Initialize dark mode
+    function initDarkMode() {
+      const savedMode = localStorage.getItem('darkMode');
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (savedMode === 'dark' || (!savedMode && systemPrefersDark)) {
+        htmlElement.classList.add('dark');
+        darkModeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>';
+        mobileDarkModeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>';
+      }
+    }
+    
+    // Toggle dark mode
+    function toggleDarkMode() {
+      htmlElement.classList.toggle('dark');
+      
+      if (htmlElement.classList.contains('dark')) {
+        darkModeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>';
+        mobileDarkModeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>';
+        localStorage.setItem('darkMode', 'dark');
+      } else {
+        darkModeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>';
+        mobileDarkModeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>';
+        localStorage.setItem('darkMode', 'light');
+      }
+    }
+    
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+      mobileMenu.classList.toggle('hidden');
+    }
+    
+    // Open cart modal
+    function openCartModal() {
+      cartModal.classList.add('active');
+      document.body.style.overflow = "hidden";
+      renderCartItems();
+    }
+    
+    // Close cart modal
+    function closeCartModalHandler() {
+      cartModal.classList.remove('active');
+      document.body.style.overflow = "";
+    }
+    
+    // Open checkout modal
+    function openCheckoutModal() {
+      checkoutModal.classList.add('active');
+      document.body.style.overflow = "hidden";
+      updateCheckoutTotal();
+    }
+    
+    // Close checkout modal
+    function closeCheckoutModalHandler() {
+      checkoutModal.classList.remove('active');
+      document.body.style.overflow = "";
+    }
+    
+    // Open confirmation modal
+    function openConfirmationModal() {
+      confirmationModal.classList.add('active');
+      document.body.style.overflow = "hidden";
+      
+      // Generate random order number
+      orderNumber.textContent = Math.floor(10000 + Math.random() * 90000);
+      
+      // Set current date
+      const today = new Date();
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      orderDate.textContent = today.toLocaleDateString('en-US', options);
+      
+      // Set order total
+      orderTotal.textContent = calculateCartTotal().toFixed(2);
+      
+      // Set payment method
+      const selectedPayment = document.querySelector('input[name="paymentMethod"]:checked').value;
+      let paymentText = '';
+      
+      switch(selectedPayment) {
+        case 'creditCard':
+          paymentText = 'Credit Card';
+          break;
+        case 'paypal':
+          paymentText = 'PayPal';
+          break;
+        case 'applePay':
+          paymentText = 'Apple Pay';
+          break;
+        default:
+          paymentText = 'Credit Card';
+      }
+      
+      paymentMethod.textContent = paymentText;
+    }
+    
+    // Close any modal
+    function closeModalHandler() {
+      document.querySelectorAll('.modal-overlay').forEach(modal => {
+        modal.classList.remove('active');
+      });
+      document.body.style.overflow = "";
+    }
+    
+    // Add to cart
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      
+      if (!product) return;
+      
+      const existingItem = cart.find(item => item.id === productId);
+      
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          quantity: 1
+        });
+      }
+      
+      updateCartBadge();
+      showAddToCartFeedback();
+    }
+    
+    // Remove from cart
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      updateCartBadge();
+      renderCartItems();
+    }
+    
+    // Update quantity in cart
+    function updateQuantity(productId, newQuantity) {
+      const item = cart.find(item => item.id === productId);
+      
+      if (item) {
+        item.quantity = parseInt(newQuantity);
+        
+        if (item.quantity <= 0) {
+          removeFromCart(productId);
+        } else {
+          renderCartItems();
+        }
+      }
+    }
+    
+    // Update cart badge
+    function updateCartBadge() {
+      const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+      
+      if (totalItems > 0) {
+        cartBadge.textContent = totalItems;
+        cartBadge.classList.remove('hidden');
+        mobileCartBadge.textContent = totalItems;
+        mobileCartBadge.classList.remove('hidden');
+        checkoutButton.disabled = false;
+      } else {
+        cartBadge.classList.add('hidden');
+        mobileCartBadge.classList.add('hidden');
+        checkoutButton.disabled = true;
+      }
+    }
+    
+    // Calculate cart subtotal
+    function calculateCartSubtotal() {
+      return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    }
+    
+    // Calculate cart total
+    function calculateCartTotal() {
+      return calculateCartSubtotal();
+    }
+    
+    // Update checkout total
+    function updateCheckoutTotal() {
+      const total = calculateCartTotal();
+      checkoutTotal.textContent = total.toFixed(2);
+    }
+    
+    // Show add to cart feedback
+    function showAddToCartFeedback() {
+      const feedback = document.createElement('div');
+      feedback.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in';
+      feedback.textContent = 'Added to cart!';
+      
+      document.body.appendChild(feedback);
+      
+      setTimeout(() => {
+        feedback.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+        setTimeout(() => feedback.remove(), 300);
+      }, 2000);
+    }
+    
+    // Render cart items
+    function renderCartItems() {
+      if (cart.length === 0) {
+        cartItems.innerHTML = `
+          <div class="text-center py-8">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <p class="text-gray-600 dark:text-gray-300">Your cart is empty</p>
+          </div>
+        `;
+        cartSubtotal.textContent = '$0.00';
+        cartTotal.textContent = '$0.00';
+        return;
+      }
+      
+      cartItems.innerHTML = cart.map(item => `
+        <div class="flex items-start py-4 border-b border-gray-200 dark:border-gray-700">
+          <div class="flex-shrink-0 w-20 h-20 bg-gray-200 dark:bg-gray-600 rounded-lg overflow-hidden mr-4">
+            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
+          </div>
+          <div class="flex-1">
+            <h3 class="font-medium text-gray-800 dark:text-white">${item.name}</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">$${item.price.toFixed(2)}</p>
+            <div class="flex items-center mt-2">
+              <button class="decrease-quantity px-2 py-1 bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-l" data-id="${item.id}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                </svg>
+              </button>
+              <input type="number" min="1" value="${item.quantity}" class="quantity-input w-12 text-center border-t border-b border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
+              <button class="increase-quantity px-2 py-1 bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-r" data-id="${item.id}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="ml-4">
+            <p class="font-medium text-gray-800 dark:text-white">$${(item.price * item.quantity).toFixed(2)}</p>
+            <button class="remove-item mt-2 text-sm text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 transition" data-id="${item.id}">
+              Remove
+            </button>
+          </div>
+        </div>
+      `).join('');
+      
+      // Update totals
+      const subtotal = calculateCartSubtotal();
+      const total = calculateCartTotal();
+      
+      cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+      cartTotal.textContent = `$${total.toFixed(2)}`;
+      
+      // Add event listeners to quantity buttons
+      document.querySelectorAll('.decrease-quantity').forEach(button => {
+        button.addEventListener('click', function() {
+          const productId = parseInt(this.getAttribute('data-id'));
+          const item = cart.find(item => item.id === productId);
+          
+          if (item && item.quantity > 1) {
+            updateQuantity(productId, item.quantity - 1);
+          }
+        });
+      });
+      
+      document.querySelectorAll('.increase-quantity').forEach(button => {
+        button.addEventListener('click', function() {
+          const productId = parseInt(this.getAttribute('data-id'));
+          const item = cart.find(item => item.id === productId);
+          
+          if (item) {
+            updateQuantity(productId, item.quantity + 1);
+          }
+        });
+      });
+      
+      document.querySelectorAll('.quantity-input').forEach(input => {
+        input.addEventListener('change', function() {
+          const productId = parseInt(this.closest('.flex').querySelector('button').getAttribute('data-id'));
+          updateQuantity(productId, this.value);
+        });
+      });
+      
+      document.querySelectorAll('.remove-item').forEach(button => {
+        button.addEventListener('click', function() {
+          const productId = parseInt(this.getAttribute('data-id'));
+          removeFromCart(productId);
+        });
+      });
+    }
+    
+    // Render stars for ratings
+    function renderStars(rating) {
+      const fullStars = Math.floor(rating);
+      const hasHalfStar = rating % 1 >= 0.5;
+      const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+      
+      let stars = '';
+      
+      for (let i = 0; i < fullStars; i++) {
+        stars += '<i class="fas fa-star"></i>';
+      }
+      
+      if (hasHalfStar) {
+        stars += '<i class="fas fa-star-half-alt"></i>';
+      }
+      
+      for (let i = 0; i < emptyStars; i++) {
+        stars += '<i class="far fa-star"></i>';
+      }
+      
+      return stars;
+    }
+    
+    // Initialize testimonial slider
+    function initTestimonialSlider() {
+      let currentSlide = 0;
+      const totalSlides = testimonialSlides.length;
+      
+      function showSlide(index) {
+        testimonialSlides.forEach(slide => slide.classList.remove('active'));
+        testimonialSlides[index].classList.add('active');
+        currentSlide = index;
+      }
+      
+      function nextSlide() {
+        const newIndex = (currentSlide + 1) % totalSlides;
+        showSlide(newIndex);
+      }
+      
+      function prevSlide() {
+        const newIndex = (currentSlide - 1 + totalSlides) % totalSlides;
+        showSlide(newIndex);
+      }
+      
+      // Auto-advance slides
+      setInterval(nextSlide, 8000);
+      
+      // Navigation arrows
+      testimonialNext.addEventListener('click', nextSlide);
+      testimonialPrev.addEventListener('click', prevSlide);
+      
+      // Show first slide
+      showSlide(0);
+    }
+    
+    // Initialize FAQ accordion
+    function initFAQAccordion() {
+      faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+          const answer = this.nextElementSibling;
+          const icon = this.querySelector('.faq-icon');
+          
+          // Toggle answer visibility
+          answer.classList.toggle('hidden');
+          
+          // Toggle icon rotation
+          if (answer.classList.contains('hidden')) {
+            icon.style.transform = 'rotate(0deg)';
+          } else {
+            icon.style.transform = 'rotate(180deg)';
+          }
+        });
+      });
+    }
+    
+    // Initialize contact form
+    function initContactForm() {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+        
+        // In a real app, you would send this data to your server
+        console.log('Contact form submitted:', { name, email, subject, message });
+        
+        // Show success message
+        alert('Thank you for your message! We will get back to you soon.');
+        
+        // Reset form
+        this.reset();
+      });
+    }
+    
+    // Initialize checkout form
+    function initCheckoutForm() {
+      checkoutForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('checkoutEmail').value;
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const address = document.getElementById('address').value;
+        const city = document.getElementById('city').value;
+        const state = document.getElementById('state').value;
+        const zip = document.getElementById('zip').value;
+        const country = document.getElementById('country').value;
+        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+        
+        // In a real app, you would process the payment and send order data to your server
+        console.log('Checkout form submitted:', {
+          email,
+          firstName,
+          lastName,
+          address,
+          city,
+          state,
+          zip,
+          country,
+          paymentMethod,
+          cart,
+          total: calculateCartTotal()
+        });
+        
+        // Close checkout modal and show confirmation
+        closeCheckoutModalHandler();
+        openConfirmationModal();
+        
+        // Clear cart
+        cart = [];
+        updateCartBadge();
+      });
+    }
+    
+    // Initialize event listeners
+    function initEventListeners() {
+      // Dark mode toggle
+      darkModeToggle.addEventListener('click', toggleDarkMode);
+      mobileDarkModeToggle.addEventListener('click', toggleDarkMode);
+      
+      // Mobile menu toggle
+      mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+      
+      // Cart buttons
+      cartButton.addEventListener('click', openCartModal);
+      mobileCartButton.addEventListener('click', openCartModal);
+      
+      // Close cart modal
+      closeCartModal.addEventListener('click', closeCartModalHandler);
+      cartModal.addEventListener('click', function(e) {
+        if (e.target === cartModal) {
+          closeCartModalHandler();
+        }
+      });
+      
+      // Checkout button
+      checkoutButton.addEventListener('click', openCheckoutModal);
+      
+      // Close checkout modal
+      closeCheckoutModal.addEventListener('click', closeCheckoutModalHandler);
+      checkoutModal.addEventListener('click', function(e) {
+        if (e.target === checkoutModal) {
+          closeCheckoutModalHandler();
+        }
+      });
+      
+      // Close confirmation modal
+      confirmationModal.addEventListener('click', function(e) {
+        if (e.target === confirmationModal) {
+          closeModalHandler();
+        }
+      });
+      
+      // Close any modal with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeModalHandler();
+        }
+      });
+      
+      // Add to cart buttons
+      document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function() {
+          const productId = parseInt(this.getAttribute('data-product-id'));
+          addToCart(productId);
+        });
+      });
+    }
+    
+    // Initialize the app
+    function init() {
+      initDarkMode();
+      initTestimonialSlider();
+      initFAQAccordion();
+      initContactForm();
+      initCheckoutForm();
+      initEventListeners();
+    }
+    
+    // Start the app when DOM is loaded
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
